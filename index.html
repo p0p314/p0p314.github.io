@@ -16,7 +16,16 @@
             background-color: #f2f2f2;
             margin: 0;
         }
-    
+        .page_title {
+            position: absolute;
+            top: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            width: 100%;
+        }
+
         .word_display {
             text-align: center;
             background: white;
@@ -1145,6 +1154,8 @@
     </script>
 </head>
 <body>
+    <div class="page_title">Monèse</div>
+
     <div class="word_display">
         <div class="word">Clique pour un mot</div>
         <div class="definition"></div>
@@ -1152,6 +1163,7 @@
         <button onclick="getWord()">Un nouveau mot</button>
     </div>
 </body>
+  
 
 
 </html>
