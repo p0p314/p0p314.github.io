@@ -206,9 +206,9 @@
     <div class="container">
         <h1>Dictionnaire des Mots Rares</h1>
         
-        <div class="search-container">
+        <!-- <div class="search-container">
             <input type="text" class="search-input" id="search" placeholder="Rechercher un mot...">
-        </div>
+        </div> -->
         
         <div class="stats">
             <span id="mot-count">7 mots</span> dans le dictionnaire
@@ -1287,7 +1287,7 @@
         
 
         const liste = document.getElementById("liste-mots");
-        const searchInput = document.getElementById("search");
+        // const searchInput = document.getElementById("search");
         const motCount = document.getElementById("mot-count");
 
         function createDifficultyStars(difficulte) {
@@ -1331,15 +1331,15 @@
         }
 
         // Fonction de recherche
-        searchInput.addEventListener('input', (e) => {
-            const terme = e.target.value.toLowerCase();
-            const motsFiltrés = dico.filter(mot => 
-                mot.Mot.toLowerCase().includes(terme) ||
-                mot.Définition.toLowerCase().includes(terme) ||
-                mot.Type.toLowerCase().includes(terme)
-            );
-            renderMots(motsFiltrés);
-        });
+        // searchInput.addEventListener('input', (e) => {
+        //     const terme = e.target.value.toLowerCase();
+        //     const motsFiltrés = dico.filter(mot => 
+        //         mot.Mot.toLowerCase().includes(terme) ||
+        //         mot.Définition.toLowerCase().includes(terme) ||
+        //         mot.Type.toLowerCase().includes(terme)
+        //     );
+        //     renderMots(motsFiltrés);
+        // });
 
         // Initialisation
         renderMots();
