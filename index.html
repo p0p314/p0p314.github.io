@@ -132,6 +132,24 @@
         .hidden {
             display: none;
         }
+        .example {
+    font-size: 1rem;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9ff;
+    border-left: 4px solid #667eea;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.example::before {
+    content: "Exemple : ";
+    font-weight: bold;
+    color: #667eea;
+}
+
 
         .back-button {
             background: #6c757d;
@@ -151,6 +169,7 @@
             <div class="word" id="currentWord">Clique pour un mot</div>
             <div class="definition" id="currentDefinition"></div>
             <div class="difficulty" id="currentDifficulty"></div>
+            <div class="example" id="currentExample"></div>
             <button onclick="getRandomWord()">J'en veux un autre !</button>
             <div class="navigation">
                 <span class="nav-link" onclick="showWordList()">Voir tous les mots</span>
@@ -1240,6 +1259,7 @@
         function showWordDetails(entry) {
             document.getElementById('currentWord').textContent = entry.Mot;
             document.getElementById('currentDefinition').textContent = entry.Définition;
+            document.getElementById('currentExample').textContent = entry.Exemple;
             document.getElementById('currentDifficulty').textContent = `Difficulté : ${entry.Difficulté}`;
         }
 
