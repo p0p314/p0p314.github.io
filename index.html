@@ -6,7 +6,61 @@
     <link rel="stylesheet" href="monese.css">
 
     <title>Monèse</title>
-    <script src="">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            margin: 0;
+        }
+    
+        .word_display {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .word {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    
+        .definition {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+    
+        .difficulty {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+    
+        button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #4A90E2;
+            color: white;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+    </head>
+    
+      
+    <script >
+        
         let dico = [
             {
                 "Première lettre": "B",
@@ -1078,19 +1132,24 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function getWord() {
-            let word = dico[getRandomIntInclusive(0, 132)]
-            console.log(word)
+         getWord = () => {
+            const word = dico[getRandomIntInclusive(0, dico.length - 1)];
+
+            document.querySelector(".word").textContent = word.Mot;
+            document.querySelector(".definition").textContent = word.Définition;
+            document.querySelector(".difficulty").textContent = "Difficulté : " + word.Difficulté;
         }
+        window.onload = getWord()
+
     </script>
 </head>
 <body>
     <div class="word_display">
-        <div class="word"></div>
+        <div class="word">Clique pour un mot</div>
         <div class="definition"></div>
-        <button onclick="getWord()"></button>
+        <div class="difficulty"></div>
+        <button onclick="getWord()">Un nouveau mot</button>
     </div>
-    
 </body>
 
 
