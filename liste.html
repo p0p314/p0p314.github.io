@@ -1321,9 +1321,9 @@
                 li.addEventListener("click", () => {
                     // Note: localStorage n'est pas disponible dans cet environnement
                     // Dans votre version finale, décommentez la ligne suivante :
-                    // localStorage.setItem("motSelectionne", dico.findIndex(m => m.Mot === mot.Mot));
+                    localStorage.setItem("motSelectionne", dico.findIndex(m => m.Mot === mot.Mot));
                     console.log(`Mot sélectionné: ${mot.Mot}`);
-                    // window.location.href = "index.html";
+                     window.location.href = "index.html";
                 });
                 
                 liste.appendChild(li);
