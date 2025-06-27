@@ -3,141 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="monese.css">
-
-    <title>Monèse</title>
+    <title>Liste des mots</title>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-    
+
         body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 1rem;
-        }
-        .nav_button {
-    position: absolute;
-    top: 70px;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.nav_button:hover {
-    background-color: #d0d0d0;
-}
-
-@media (max-width: 480px) {
-    .nav_button {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-        top: 60px;
-    }
-}
-
-    
-        .page_title {
-            position: absolute;
-            top: 20px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-            width: 100%;
-            padding: 0 1rem;
-        }
-    
-        .word_display {
-            text-align: center;
-            background: white;
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            color: #333;
         }
-    
-        .word {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            word-wrap: break-word;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-    
-        .definition {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
-    
-        .difficulty {
-            color: #888;
-            font-style: italic;
-            margin-bottom: 1.5rem;
+
+        #liste-mots {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+            padding: 0;
         }
-    
-        button {
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: 8px;
-            background-color: #4A90E2;
-            color: white;
+
+        .mot-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mot-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mot-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .mot-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .mot-item:active {
+            transform: translateY(-2px);
+        }
+
+        .mot-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mot-lettre {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .mot-type {
+            display: inline-block;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .difficulte {
+            display: flex;
+            gap: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .etoile {
+            width: 12px;
+            height: 12px;
+            background: #ddd;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .etoile.active {
+            background: #f39c12;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
             width: 100%;
-            max-width: 250px;
+            padding: 1rem 1.5rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
         }
-    
-        button:hover {
-            background-color: #357ABD;
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-    
-        @media (max-width: 480px) {
-            .page_title {
-                font-size: 1.5rem;
-                top: 15px;
+
+        .search-input::placeholder {
+            color: #95a5a6;
+        }
+
+        .stats {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
             }
-    
-            .word_display {
+
+            .container {
                 padding: 1.5rem;
             }
-    
-            .word {
-                font-size: 1.5rem;
+
+            h1 {
+                font-size: 2rem;
             }
-    
-            .definition {
-                font-size: 1rem;
+
+            .mot-item {
+                padding: 1rem;
             }
-    
-            button {
-                font-size: 0.9rem;
-                padding: 0.7rem 1.2rem;
+        }
+
+        /* Animation d'entrée */
+        .mot-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
-    
-    </head>
-    
-    
-    <script >
-          window.addEventListener('DOMContentLoaded', function () {
-                getWord();
-            });
-        let dico = [
+</head>
+<body>
+    <div class="container">
+        <h1>Dictionnaire des Mots Rares</h1>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" id="search" placeholder="Rechercher un mot...">
+        </div>
+        
+        <div class="stats">
+            <span id="mot-count">7 mots</span> dans le dictionnaire
+        </div>
+        
+        <ul id="liste-mots"></ul>
+    </div>
+
+    <script>
+          let dico = [
             {
                 "Première lettre": "B",
                 "Mot": "bucolique",
@@ -1202,49 +1283,66 @@
                 "Type": "nom masculin",
                 "Difficulté": 5
             }
-        ]
+        ];
+        
 
-        function getRandomIntInclusive(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
+        const liste = document.getElementById("liste-mots");
+        const searchInput = document.getElementById("search");
+        const motCount = document.getElementById("mot-count");
+
+        function createDifficultyStars(difficulte) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<div class="etoile ${i <= difficulte ? 'active' : ''}"></div>`;
+            }
+            return stars;
         }
 
-          function getWord(index = null) {
-        let word;
-        if (index !== null) {
-            word = dico[index];
-        } else {
-            word = dico[getRandomIntInclusive(0, dico.length - 1)];
+        function renderMots(mots = dico) {
+            liste.innerHTML = '';
+            motCount.textContent = `${mots.length} mot${mots.length > 1 ? 's' : ''}`;
+            
+            mots.forEach((mot, index) => {
+                const li = document.createElement("li");
+                li.className = "mot-item";
+                li.style.animationDelay = `${index * 0.1}s`;
+                
+                li.innerHTML = `
+                    <div class="mot-title">
+                        <span class="mot-lettre">${mot["Première lettre"]}</span>
+                        ${mot.Mot}
+                        <span class="mot-type">${mot.Type}</span>
+                    </div>
+                    <div class="difficulte">
+                        ${createDifficultyStars(mot.Difficulté)}
+                    </div>
+                `;
+                
+                li.addEventListener("click", () => {
+                    // Note: localStorage n'est pas disponible dans cet environnement
+                    // Dans votre version finale, décommentez la ligne suivante :
+                    // localStorage.setItem("motSelectionne", dico.findIndex(m => m.Mot === mot.Mot));
+                    console.log(`Mot sélectionné: ${mot.Mot}`);
+                    // window.location.href = "index.html";
+                });
+                
+                liste.appendChild(li);
+            });
         }
 
-            document.querySelector(".word").textContent = word.Mot;
-            document.querySelector(".definition").textContent = word.Définition;
-            document.querySelector(".difficulty").textContent = "Difficulté : " + word.Difficulté;
-        }
-        window.onload = () => {
-        const motIndex = localStorage.getItem("motSelectionne");
-        if (motIndex !== null) {
-            getWord(parseInt(motIndex));
-            localStorage.removeItem("motSelectionne"); // pour éviter de le réutiliser à chaque fois
-        } else {
-            getWord(); // mot aléatoire
-        }
-    }
+        // Fonction de recherche
+        searchInput.addEventListener('input', (e) => {
+            const terme = e.target.value.toLowerCase();
+            const motsFiltrés = dico.filter(mot => 
+                mot.Mot.toLowerCase().includes(terme) ||
+                mot.Définition.toLowerCase().includes(terme) ||
+                mot.Type.toLowerCase().includes(terme)
+            );
+            renderMots(motsFiltrés);
+        });
 
+        // Initialisation
+        renderMots();
     </script>
-</head>
-<body>
-    <div class="page_title">Monèse</div>
-<a href="liste.html" class="nav_button">📚 Liste des mots</a>
-
-
-    <div class="word_display">
-        <div class="word">Clique pour un mot</div>
-        <div class="definition"></div>
-        <div class="difficulty"></div>
-        <button onclick="getWord()">Un nouveau mot</button>
-    </div>
 </body>
-  
-
-
 </html>
