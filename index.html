@@ -7,41 +7,51 @@
 
     <title>Monèse</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+    
         body {
             font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #f2f2f2;
             margin: 0;
+            padding: 1rem;
         }
+    
         .page_title {
             position: absolute;
-            top: 30px;
-            font-size: 2rem;
+            top: 20px;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #333;
             text-align: center;
             width: 100%;
+            padding: 0 1rem;
         }
-
+    
         .word_display {
             text-align: center;
             background: white;
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
         }
     
         .word {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 1rem;
+            word-wrap: break-word;
         }
     
         .definition {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
         }
     
@@ -59,12 +69,39 @@
             background-color: #4A90E2;
             color: white;
             cursor: pointer;
+            width: 100%;
+            max-width: 250px;
         }
     
         button:hover {
             background-color: #357ABD;
         }
+    
+        @media (max-width: 480px) {
+            .page_title {
+                font-size: 1.5rem;
+                top: 15px;
+            }
+    
+            .word_display {
+                padding: 1.5rem;
+            }
+    
+            .word {
+                font-size: 1.5rem;
+            }
+    
+            .definition {
+                font-size: 1rem;
+            }
+    
+            button {
+                font-size: 0.9rem;
+                padding: 0.7rem 1.2rem;
+            }
+        }
     </style>
+    
     </head>
     
       
