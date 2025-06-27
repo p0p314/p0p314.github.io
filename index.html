@@ -60,7 +60,9 @@
     
       
     <script >
-        
+          window.addEventListener('DOMContentLoaded', function () {
+                getWord();
+            });
         let dico = [
             {
                 "Première lettre": "B",
@@ -1139,7 +1141,6 @@
             document.querySelector(".definition").textContent = word.Définition;
             document.querySelector(".difficulty").textContent = "Difficulté : " + word.Difficulté;
         }
-        window.onload = getWord()
 
     </script>
 </head>
