@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        getWord =  async () => {
+                await fetch('http://localhost:3000/flapi')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur lors de la requête');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Données reçues :', data);
+                        // Tu peux maintenant les utiliser dans ton DOM
+                    })
+                    .catch(error => {
+                        console.error('Erreur fetch :', error);
+                    });
+            }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
