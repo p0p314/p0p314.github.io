@@ -295,20 +295,24 @@
             top10.forEach(([mot, count], index) => {
                 // Ici tu peux récupérer des infos supplémentaires du mot via ton jsonData si besoin
                 // Pour l'exemple, on crée une structure simple
-                const difficulte = 3; // valeur fixe ou à adapter si tu as une source
 
-                const li = document.createElement('li');
-                li.innerHTML = `
+                if(count != 0){
+
+                    const difficulte = 3; // valeur fixe ou à adapter si tu as une source
+                    
+                    const li = document.createElement('li');
+                    li.innerHTML = `
                     <div class="mot-title">
                         <span class="mot-lettre">${mot.charAt(0).toUpperCase()}</span>
                         ${mot}
                         <span class="mot-type">Favori</span>
                         <span class="favori-icon" style="margin-left:auto;">⭐</span>
-                    </div>
-                    <p>Ajouté ${count} fois</p>
-                    <div class="difficulte">${genererEtoiles(difficulte)}</div>
-                `;
-                topList.appendChild(li);
+                        </div>
+                        <p>Ajouté ${count} fois</p>
+                        <div class="difficulte">${genererEtoiles(difficulte)}</div>
+                        `;
+                        topList.appendChild(li);
+                    }
             });
 
             if (top10.length === 0) {
