@@ -1,290 +1,147 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liste des mots</title>
-  <style>
-       * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <title>Favoris</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 2rem;
-            color: #333;
-        }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    color: #333;
+  }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
 
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        #liste-mots {
-            list-style: none;
-            display: grid;
-            gap: 1rem;
-            padding: 0;
-        }
-        .nav_button {
-    position: absolute;
-    top: -25px;
-    left: 30%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+  .retour {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-decoration: none;
     color: #2c3e50;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* Taille fixe */
+    transition: all 0.3s ease;
     width: 180px;
-    text-align: center;
-    box-sizing: border-box;
-}
+    margin: 0 auto 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
 
-.nav_button:hover {
+  .retour:hover {
     background: white;
-    transform: translateX(-50%) translateY(-2px);
-    border-color: #667eea;
+    transform: translateY(-2px);
+    border: 2px solid #667eea;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+  }
 
- .nav_button2 {
-    position: absolute;
-    top: -25px;
-    left: 70%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.9);
+  #liste-favoris {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .favori-item {
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    color: #2c3e50;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    /* Taille fixe */
-    width: 180px;
-    text-align: center;
-    box-sizing: border-box;
-}
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-.nav_button2:hover {
-    background: white;
-    transform: translateX(-50%) translateY(-2px);
+  .favori-item:hover {
+    transform: translateY(-5px);
     border-color: #667eea;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
 
-        .mot-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
+  .favori-item h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
 
-        .mot-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
+  .favori-item p {
+    margin: 0.5rem 0;
+    color: #555;
+  }
 
-        .mot-item:hover::before {
-            transform: translateX(0);
-        }
+  button {
+    background: linear-gradient(45deg, #ff6b6b, #ff4757);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
 
-        .mot-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
-        }
+  button:hover {
+    background: linear-gradient(45deg, #ff4757, #e84118);
+    transform: translateY(-2px);
+  }
 
-        .mot-item:active {
-            transform: translateY(-2px);
-        }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-        .mot-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+  @media (max-width: 768px) {
+    body {
+      padding: 1rem;
+    }
 
-        .mot-lettre {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2rem;
-            height: 2rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 50%;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
+    .favori-item {
+      width: 100%;
+    }
 
-        .mot-type {
-            display: inline-block;
-            background: #ecf0f1;
-            color: #7f8c8d;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-left: auto;
-        }
-
-        .difficulte {
-            display: flex;
-            gap: 2px;
-            margin-top: 0.5rem;
-        }
-
-        .etoile {
-            width: 12px;
-            height: 12px;
-            background: #ddd;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
-
-        .etoile.active {
-            background: #f39c12;
-        }
-
-        .search-container {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .favori-icon {
-    font-size: 1.3rem;
-    transition: transform 0.2s ease;
-}
-
-.favori-icon:hover {
-    transform: scale(1.2);
-}
-
-
-        .search-input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid #ecf0f1;
-            border-radius: 50px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .search-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .search-input::placeholder {
-            color: #95a5a6;
-        }
-
-        .stats {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .container {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .mot-item {
-                padding: 1rem;
-            }
-        }
-
-        /* Animation d'entrée */
-        .mot-item {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-  </style>
+    h1 {
+    color: white;
+      font-size: 2rem;
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Dictionnaire des Mots Rares</h1>
-    <a href="index.html" class="nav_button">📚 Mot aléatoire</a>
-    <a href="favoris.html" class="nav_button2">⭐ Mots favoris</a>
-
-    <div class="stats">
-      <span id="mot-count">0 mot</span> dans le dictionnaire
-    </div>
-
-    <ul id="liste-mots"></ul>
-  </div>
+  <h1>⭐ Vos mots favoris</h1>
+  <a href="liste.html">← Retour à la liste</a>
+  <div id="liste-favoris"></div>
 
   <script>
-    let dico = [
+       let dico = [
             {
                 "Première lettre": "B",
                 "Mot": "bucolique",
@@ -1351,61 +1208,44 @@
             }
         ]
 
-    const listeMots = document.getElementById("liste-mots");
-    const motCount = document.getElementById("mot-count");
-
-    const favoris = JSON.parse(localStorage.getItem("favoris")) || [];
-
-    function enregistrerFavoris() {
-      localStorage.setItem("favoris", JSON.stringify(favoris));
+    function getMotData(nomMot) {
+      return dico.find(m => m.Mot === nomMot);
     }
 
-    function estFavori(mot) {
-      return favoris.includes(mot);
+    function supprimerFavori(mot) {
+      let favoris = JSON.parse(localStorage.getItem('favoris')) || [];
+      favoris = favoris.filter(m => m !== mot);
+      localStorage.setItem('favoris', JSON.stringify(favoris));
+      location.reload();
     }
 
-    function toggleFavori(mot, icon) {
-      const index = favoris.indexOf(mot);
-      if (index === -1) {
-        favoris.push(mot);
-      } else {
-        favoris.splice(index, 1);
+    window.onload = function () {
+      const favoris = JSON.parse(localStorage.getItem('favoris')) || [];
+      const container = document.getElementById('liste-favoris');
+
+      if (favoris.length === 0) {
+        container.innerHTML = "<p>Vous n'avez aucun favori.</p>";
+        return;
       }
-      enregistrerFavoris();
-      icon.textContent = estFavori(mot) ? "⭐" : "☆";
-    }
 
-    function afficherMots() {
-      listeMots.innerHTML = "";
-      dico.forEach(item => {
-        const li = document.createElement("li");
-        li.className = "mot-item";
+      favoris.forEach(nomMot => {
+        const motData = getMotData(nomMot);
+        if (!motData) return;
 
-        const etoiles = Array.from({length: 5}, (_, i) =>
-          `<span class="etoile ${i < item.Difficulté ? "active" : ""}"></span>`).join("");
+        const div = document.createElement('div');
+        div.classList.add('favori-item');
 
-        li.innerHTML = `
-          <div class="mot-title">
-            <span class="mot-lettre">${item["Première lettre"]}</span>
-            ${item.Mot}
-            <span class="mot-type">${item.Type}</span>
-            <span class="favori-icon" style="margin-left:auto;cursor:pointer;">${estFavori(item.Mot) ? "⭐" : "☆"}</span>
-          </div>
-          <p>${item.Définition}</p>
-          <em>${item.Exemple}</em>
-          <div class="difficulte">${etoiles}</div>
+        div.innerHTML = `
+          <h3>${motData.Mot}</h3>
+          <p><strong>Définition :</strong> ${motData.Définition}</p>
+          <p><strong>Exemple :</strong> <em>${motData.Exemple}</em></p>
+          <p><strong>Type :</strong> ${motData.Type}</p>
+          <button onclick="supprimerFavori('${motData.Mot}')">Supprimer</button>
         `;
 
-        const favoriIcon = li.querySelector(".favori-icon");
-        favoriIcon.addEventListener("click", () => toggleFavori(item.Mot, favoriIcon));
-
-        listeMots.appendChild(li);
+        container.appendChild(div);
       });
-
-      motCount.textContent = `${dico.length} mot${dico.length > 1 ? "s" : ""} dans le dictionnaire`;
-    }
-
-    afficherMots();
+    };
   </script>
 </body>
 </html>
