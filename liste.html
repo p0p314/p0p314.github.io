@@ -1356,10 +1356,31 @@
 
     const favoris = JSON.parse(localStorage.getItem("favoris")) || [];
 
-    function enregistrerFavoris() {
-      localStorage.setItem("favoris", JSON.stringify(favoris));
-      
-    }
+    function enregistrerFavoris(mot, action) {
+            // Sauvegarde locale
+            localStorage.setItem("favoris", JSON.stringify(favoris));
+
+            // Envoi au serveur
+            fetch('http://localhost:3000/favoris/mots', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // Exemple d'envoi d'un seul mot, adapte selon ta structure
+                body: JSON.stringify({
+                    action: action,
+                    mot: mot // dernier mot ajouté (exemple)
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Réponse serveur:', data);
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'enregistrement serveur:', error);
+                });
+        }
+
 
     function estFavori(mot) {
       return favoris.includes(mot);
@@ -1369,10 +1390,11 @@
       const index = favoris.indexOf(mot);
       if (index === -1) {
         favoris.push(mot);
-      } else {
+        enregistrerFavoris(mot, 'ajouter');
+    } else {
         favoris.splice(index, 1);
+        enregistrerFavoris(mot, 'retirer');
       }
-      enregistrerFavoris();
       icon.textContent = estFavori(mot) ? "⭐" : "☆";
     }
 
