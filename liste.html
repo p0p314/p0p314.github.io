@@ -1349,9 +1349,23 @@
                 li.addEventListener("click", () => {
                     // Note: localStorage n'est pas disponible dans cet environnement
                     // Dans votre version finale, décommentez la ligne suivante :
-                    localStorage.setItem("motSelectionne", dico.findIndex(m => m.Mot === mot.Mot));
-                    console.log(`Mot sélectionné: ${mot.Mot}`);
-                     window.location.href = "index.html";
+                   // localStorage.setItem("motSelectionne", dico.findIndex(m => m.Mot === mot.Mot));
+//console.log(`Mot sélectionné: ${mot.Mot}`);
+                 //    window.location.href = "index.html";
+                 fetch('http://localhost:3000/vagir')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erreur lors de la requête');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Données reçues :', data);
+                            // Tu peux maintenant les utiliser dans ton DOM
+                        })
+                        .catch(error => {
+                            console.error('Erreur fetch :', error);
+                        });
                 });
                 
                 liste.appendChild(li);
