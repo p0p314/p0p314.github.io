@@ -95,4 +95,20 @@ app.post('/favoris/mots', (req, res) => {
       res.status(500).json({ error: "Erreur interne du serveur" });
     }
   });
+
+
+app.get('/favoris/mots', (req, res) => {
+  try {
+    if (!fs.existsSync(favPath)) {
+      return res.json({}); // fichier vide => favoris vide
+    }
+    const data = fs.readFileSync(favPath, 'utf8');
+    const favoris = data ? JSON.parse(data) : {};
+    res.json(favoris);
+  } catch (error) {
+    console.error('Erreur lors de la lecture des favoris:', error);
+    res.status(500).json({ error: 'Erreur interne du serveur' });
+  }
+});
+
 module.exports = app;

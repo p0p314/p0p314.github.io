@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Top 10 des Mots Rares</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+    
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+    
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+    
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    
+        .top-list {
+            list-style: none;
+            counter-reset: item;
+        }
+    
+        .top-list li {
+            background: white;
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            counter-increment: item;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .top-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+    
+        .top-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        .mot-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    
+        .mot-lettre {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+    
+        .mot-type {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 15px;
+            font-weight: normal;
+        }
+    
+        .favori-icon {
+            font-size: 1.5rem;
+            margin-left: auto !important;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+    
+        .favori-icon:hover {
+            transform: scale(1.2);
+        }
+    
+        .top-list li p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+    
+        .top-list li em {
+            display: block;
+            background: #f8f9fa;
+            padding: 12px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            color: #666;
+        }
+    
+        .difficulte {
+            text-align: right;
+            font-size: 1.2rem;
+        }
+    
+        .difficulte .etoile {
+            color: #f39c12;
+            margin: 0 2px;
+        }
+    
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+    
+            .mot-title {
+                font-size: 1.2rem;
+            }
+    
+            .top-list li {
+                padding: 20px;
+            }
+        }
+
+        .nav_button {
+    position: absolute;
+    top: 50px;
+    left: 10%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #2c3e50;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Taille fixe */
+    width: 180px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.nav_button:hover {
+    background: white;
+    transform: translateX(-50%) translateY(-2px);
+    border-color: #667eea;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+ .nav_button2 {
+    position: absolute;
+    top: 50px;
+    left: 90%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #2c3e50;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Taille fixe */
+    width: 180px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.nav_button2:hover {
+    background: white;
+    transform: translateX(-50%) translateY(-2px);
+    border-color: #667eea;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="nav_button">📚 Mot aléatoire</a>
+        <a href="favoris.html" class="nav_button2">⭐ Mots favoris</a>
+    
+    
+    
+        <ul id="liste-mots"></ul>
+    </div>
+        <div class="header">
+            <h1>🏆 Top 10 des Mots Rares</h1>
+            <p>Découvrez les mots les plus fascinants de la langue française</p>
+        </div>
+
+        <ul class="top-list" id="topList">
+            <!-- Les mots seront générés par JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        // Variable globale pour stocker les favoris récupérés
+        let favorisServeur = {};
+
+        // Récupère les favoris, trie et affiche le top 10
+        function recupFavoris() {
+            fetch('http://localhost:3000/favoris/mots')
+                .then(response => {
+                    if (!response.ok) throw new Error('Erreur serveur');
+                    return response.json();
+                })
+                .then(favoris => {
+                    favorisServeur = favoris;
+                    genererTop10();
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des favoris:', error);
+                });
+        }
+
+        // Fonction pour générer les étoiles selon difficulté (exemple statique ici)
+        function genererEtoiles(difficulte) {
+            let etoiles = '';
+            for (let i = 0; i < 5; i++) {
+                etoiles += i < difficulte ? '★' : '☆';
+            }
+            return etoiles;
+        }
+
+        // Fonction pour afficher le top 10 trié
+        function genererTop10() {
+            const topList = document.getElementById('topList');
+            topList.innerHTML = '';
+
+            // Convertir l'objet favoris en tableau [mot, count]
+            const entries = Object.entries(favorisServeur);
+
+            // Trier par count décroissant
+            entries.sort((a, b) => b[1] - a[1]);
+
+            // Garder top 10
+            const top10 = entries.slice(0, 10);
+
+            // Afficher chaque mot dans la liste
+            top10.forEach(([mot, count], index) => {
+                // Ici tu peux récupérer des infos supplémentaires du mot via ton jsonData si besoin
+                // Pour l'exemple, on crée une structure simple
+                const difficulte = 3; // valeur fixe ou à adapter si tu as une source
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="mot-title">
+                        <span class="mot-lettre">${mot.charAt(0).toUpperCase()}</span>
+                        ${mot}
+                        <span class="mot-type">Favori</span>
+                        <span class="favori-icon" style="margin-left:auto;">⭐</span>
+                    </div>
+                    <p>Ajouté ${count} fois</p>
+                    <div class="difficulte">${genererEtoiles(difficulte)}</div>
+                `;
+                topList.appendChild(li);
+            });
+
+            if (top10.length === 0) {
+                topList.innerHTML = "<li>Aucun mot favori pour le moment.</li>";
+            }
+        }
+
+        // Lancer la récupération au chargement
+        recupFavoris();
+    </script>
+</body>
+
+</html>
