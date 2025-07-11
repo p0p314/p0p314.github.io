@@ -29,13 +29,13 @@ app.get("/word/:word", (req,res) => {
     res.status(200).json(elm);
 })
 
-app.get('/template/:word', (req, res) => {
+app.get('/mots/:word', (req, res) => {
     const word = req.params.word;
     const mot = jsonData.find(obj => obj.Mot.toLowerCase() === word.toLowerCase());
 
     if (!mot) return res.status(404).send("Mot introuvable");
 
-    res.render('mot', { mot }); // passe l'objet à la vue
+    res.render('mots', { mot }); // passe l'objet à la vue
 });
 
 module.exports = app;
