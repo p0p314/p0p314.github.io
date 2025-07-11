@@ -1421,6 +1421,14 @@ button:hover {
         function getRandomIntInclusive(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
+        function slugify(str) {
+  return str
+    .normalize("NFD")                   // Décompose les lettres accentuées
+    .replace(/[\u0300-\u036f]/g, "")   // Supprime les diacritiques (accents)
+    .replace(/[^a-zA-Z0-9_-]/g, "")    // Supprime les caractères spéciaux
+    .toLowerCase();                    // Optionnel : tout en minuscule
+}
+
 
           function getWord(index = null) {
         let word;
@@ -1431,6 +1439,15 @@ button:hover {
         }
 
             document.querySelector(".word").textContent = word.Mot;
+            const mot = word.Mot; // ex: "Inanité"
+
+const lien = document.querySelector(".matching");
+const motFormaté = slugify(mot);
+
+lien.href = 'https://tlk.io/' + motFormaté;
+
+
+
             document.querySelector(".definition").textContent = word.Définition;
             document.getElementById('currentExample').textContent = word.Exemple;
             document.querySelector(".difficulty").textContent = "Difficulté : " + word.Difficulté;
@@ -1461,6 +1478,7 @@ button:hover {
         <div class="example" id="currentExample"></div>
         <div class="difficulty"></div>
         <button onclick="getWord()">Un nouveau mot</button>
+        <a href="" target="_blank" class="matching">si tu aimes ce mot retrouves d'autres utilisateurs comme toi !</a>
     </div>
 </div>
 </body>
